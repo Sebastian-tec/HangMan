@@ -1,0 +1,15 @@
+E:\Github\HangMan\bin\Debug\net6.0\HangMan.exe
+E:\Github\HangMan\bin\Debug\net6.0\HangMan.deps.json
+E:\Github\HangMan\bin\Debug\net6.0\HangMan.runtimeconfig.json
+E:\Github\HangMan\bin\Debug\net6.0\HangMan.dll
+E:\Github\HangMan\bin\Debug\net6.0\HangMan.pdb
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.csproj.AssemblyReference.cache
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.GeneratedMSBuildEditorConfig.editorconfig
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.AssemblyInfoInputs.cache
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.AssemblyInfo.cs
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.csproj.CoreCompileInputs.cache
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.dll
+E:\Github\HangMan\obj\Debug\net6.0\refint\HangMan.dll
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.pdb
+E:\Github\HangMan\obj\Debug\net6.0\HangMan.genruntimeconfig.cache
+E:\Github\HangMan\obj\Debug\net6.0\ref\HangMan.dll
