@@ -28,13 +28,7 @@ class Program
             List<int> wordPos = new List<int>(); // Create an array to store the word
             List<string> wordPrint = new List<string>(); // Create an array to store the word
             // Console.WriteLine(word); // Debug
-            char[] letterlist = new char[word.Length]; // Create a char array to store the word
-            
-            // Create a for loop to fill the word array with "_"
-            for (int i = 0; i < word.Length; i++)
-            {
-                letterlist[i] = word[i]; // Add the word to the char array
-            }
+            string wordPlaceHolder = word;
 
 
             // Create a while loop to check if the user has any health left
@@ -50,37 +44,21 @@ class Program
                     op.ClearCurrentConsoleLine(); // Clear the line
                 } while (!key.All(char.IsLetter));
 
-
-                //Console.WriteLine($"Key: {key}"); // Debug
-                if (op.CheckLetter(word, key)) // Check if the letter is in the random word
+                if (!wordPlaceHolder.Contains(key))
                 {
-                    for (int i = 0; i < word.Length; i++)
-                    {
-                        
-                        if (letterlist[i].ToString() == key) // Check if the letter is in the word
-                        {
-                            // Console.WriteLine($"Index: {word.IndexOf(key)}"); // Debug
-                            wordPos.Add(word.IndexOf(key)); // Add the index of the letter to the list
-                            // Console.WriteLine($"Char: {key}"); // 
-                            wordPrint.Add(key); // Add the letter to the list
-                            letterlist[i] = ' '; // Remove the letter from the char array
+                    health--;
+                    Console.WriteLine($"Wrong! {key} is not in the word!");
+                }
 
-                            Console.WriteLine("Correct! The word contains the letter " + key); // Tell the user the letter is in the word
-                        }
-                        else if (!letterlist.ToString().Contains(key) && wordPrint.Contains(key)) // Check if the letter is not in the word
-                        {
-                            Console.WriteLine($"You already guessed on {key}");
-                            health--;
-                        }
-                    }
-                }
-                else
+                while (wordPlaceHolder.Contains(key))
                 {
-                    Console.WriteLine("Incorrect! The word does not contain the letter " + key); // Tell the user the letter is not in the word
-                    health--; // Remove one from the health
+                    int ind = word.IndexOf(key);
+                    wordPrint.Add(key);
+                    wordPos.Add(ind);
+                    wordPlaceHolder = wordPlaceHolder.Replace(key, "_");
+                    Console.WriteLine($"Correct! {key} is in the word!");
                 }
-                // Console.WriteLine($"{wordPrint.Count} {wordPos.Count}"); // Debug
-                Thread.Sleep(1000);
+                
 
 
                 if (health == 0) // If their health is 0 (aka, they lost, noobs lol)
