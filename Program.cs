@@ -1,6 +1,4 @@
-﻿
-
-using HangMan;
+﻿using HangMan;
 
 class Program
 {
@@ -20,32 +18,35 @@ class Program
             do
             {
                 Console.Write("Word length: "); // Ask the user for the wordlength
-            } while (!int.TryParse(Console.ReadLine(), out length) || length > 14); // If the user input is not a number, ask again
+            } while (!int.TryParse(Console.ReadLine(), out length) || length > 14); // If the user input is not a number or it's above 14, ask again
 
 
             word = op.RandomWord(length); // Get a random word from the OutPut class
             List<int> wordPos = new List<int>(); // Create an array to store the word
             List<string> wordPrint = new List<string>(); // Create an array to store the word
-            List<string> GuessedKeys = new List<string>(); // Create an array to store the guessed keys
-            // Console.WriteLine(word); // Debug
-            string wordPlaceHolder = word; // Create a string to store the word
+            List<string> guessedKeys = new List<string>(); // Create an array to store the guessed keys
+                                                           // Console.WriteLine(word); // Debug
+
+            // The reason for the following placeholder is, that i'm replacing each letter with an underscore
+            // so i need to store the original word somewhere else
+            string wordPlaceHolder = word; // Create a string to store the word temporarily
 
 
             // Create a while loop to check if the user has any health left
             while (health > 0) // Run loop while health is above 0
             {
-                op.FullLayout(health, word, wordPrint, GuessedKeys, wordPos); // Call the FullLayout method
+                op.FullLayout(health, word, wordPrint, guessedKeys, wordPos); // Call the FullLayout method
                 string key = ""; // Placeholder for their key input
                 do
                 {
                     // Console.WriteLine(word); // Debug
                     //Console.WriteLine(GuessedKeys.Count); // Debug
                     Console.WriteLine("Type a letter to guess the word"); // Ask for their guess
-                    key = op.GetLetter(); // Save their guess in a string
+                    key = op.GetLetter().ToLower(); // Save their guess in a string and convert it to lowercase
                     op.ClearCurrentConsoleLine(); // Clear the line
                 } while (!key.All(char.IsLetter)); // If the user input is not a letter, ask again
                 
-                GuessedKeys.Add(key); // Add the key to the GuessedKeys array
+                guessedKeys.Add(key); // Add the key to the GuessedKeys array
                 
                 if (!wordPlaceHolder.Contains(key)) // If the word does not contains the letter/key they pressed
                 {
@@ -66,7 +67,7 @@ class Program
                 if (health == 0) // If their health is 0 (aka, they lost, noobs lol)
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // Set the foreground color to red
-                    op.FullLayout(health, word, wordPrint, GuessedKeys, wordPos); // Call the FullLayout method
+                    op.FullLayout(health, word, wordPrint, guessedKeys, wordPos); // Call the FullLayout method
 
                     Console.WriteLine("You ran out of health!"); // Tell the user they lost
                     Console.WriteLine($"The word was {word} and you guessed {wordPrint.Count} letters correctly"); // Tell the user the word and how many letters they guessed correctly
@@ -82,7 +83,7 @@ class Program
 
                 if (wordPrint.Count == word.Length) // If the user guessed all the letters
                 {
-                    op.FullLayout(health, word, wordPrint, GuessedKeys, wordPos);
+                    op.FullLayout(health, word, wordPrint, guessedKeys, wordPos);
                     Console.ForegroundColor = ConsoleColor.Green; // Set the foreground color to green
                     Console.WriteLine("\nYou guessed the word!"); // Tell the user they guessed the word
                     Console.ForegroundColor = ConsoleColor.White; // Set the foreground color to white (so default)
@@ -92,7 +93,7 @@ class Program
                     {
                         Environment.Exit(0); // Exit the program
                     }
-                    health = 0;
+                    health = 0; // Set health to 0 (so the while loop ends)
                 }
 
                 Console.WriteLine(); // Add a little space

@@ -9,12 +9,13 @@ global using System.Runtime.InteropServices;
 
 namespace HangMan
 {
+    // I would like to split up the long list of methods into different classes, but yeah
     public class OutputMethods // Create a class to handle input/output
     {
         // Generate a random word from a list based on the length of the wordlength
         public string RandomWord(int length)
         {
-            Random random = new Random(); // Make use of the random class
+            Random random = new(); // Make use of the random class
             string[] word = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "word.txt")); // Read all the lines from the words.txt file
             string randomWord = ""; // Get a random word from the list
             // Create a for loop to generate a random word
@@ -121,13 +122,13 @@ namespace HangMan
             {
                 print += "_"; // Add a _ to the print 
             }
-            Console.Write($"Current word: {print}"); // Write the word
+            Console.Write($"Current word: {print}"); // Write the word, "Current word:" = 14 chars
 
             if (wordPrint.Count > 0) // Check if the wordprint list is not empty
             {
                 for (int i = 0; i < wordPrint.Count; i++) // Create a for loop based on the amount of items in the list
                 {
-                    Console.SetCursorPosition(wordPos[i] + 14, Console.CursorTop); // Set the cursor position to the index of the letter + 14
+                    Console.SetCursorPosition(wordPos[i] + 14, Console.CursorTop); // Set the cursor position to the index of the letter + the length of "Current word: "
                     Console.Write($"{wordPrint[i]}"); // Write the letter(s)
                 }
             }
