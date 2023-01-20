@@ -1,4 +1,5 @@
-﻿global using System;
+﻿// I preffer using "global" infront, cuz then i don't need to write "using ---" in every file 
+global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Text;
@@ -7,7 +8,7 @@ global using System.Diagnostics.Tracing;
 
 namespace HangMan
 {
-    public class OutputMethods
+    public class OutputMethods // Create a class to handle input/output
     {
         // Generate a random word from a list based on the length of the wordlength
         public string RandomWord(int length)
@@ -49,17 +50,17 @@ namespace HangMan
         /* A void found on stackoverflow to clear the current line
          * Basically just removes the typed char for a prettier console
         */
-        public void ClearCurrentConsoleLine()
+        public void ClearCurrentConsoleLine() 
         {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.WriteLine(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor);
+            int currentLineCursor = Console.CursorTop; // Get the current line
+            Console.SetCursorPosition(0, Console.CursorTop); // Set the cursor to the start of the line
+            Console.WriteLine(new string(' ', Console.WindowWidth)); // Write a new line with the same length as the window
+            Console.SetCursorPosition(0, currentLineCursor); // Set the cursor to the start of the line
         }
 
-        public void Layout()
+        public void Layout() 
         {
-            Console.Clear();
+            Console.Clear(); // Clear the console
             Console.ForegroundColor = ConsoleColor.Magenta; // Set the foreground color to darkblue, just for fun
             Console.WriteLine(@"
   _   _                   __  __             
@@ -75,55 +76,55 @@ namespace HangMan
 
         public void HealthColor(int health)
         {
-            if (health >= 0 && health <= 3)
+            if (health >= 0 && health <= 3) // If the health is between 0 and 3
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                HealthBar(health);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Red; // Set the foreground color to red
+                HealthBar(health); // Call the healthbar method
+                Console.ForegroundColor = ConsoleColor.White; // Set the foreground color to white (so default)
             }
-            else if (health > 3 && health <= 6)
+            else if (health > 3 && health <= 6) // If the health is in between 3 & 6
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                HealthBar(health);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Yellow; // Set the foreground color to yellow, why isn't orange an option???
+                HealthBar(health); // Call the healthbar method
+                Console.ForegroundColor = ConsoleColor.White; // Set the foreground color to white (so default)
             }
-            else if (health > 6 && health <= 10)
+            else if (health > 6 && health <= 10) // If the health is between 6 and 10
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                HealthBar(health);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Green; // Set the foreground color to green
+                HealthBar(health); // Call the healthbar method
+                Console.ForegroundColor = ConsoleColor.White; // Set the foreground color to white (so default)
             }
         }
         public void HealthBar(int health)
         {
-            Console.Write("Health: ");
-            if (health > 0)
+            Console.Write("Health: "); // Write the health text
+            if (health > 0) // Check if health is above 0
             {
-                for (int i = 0; i <= health; i++)
+                for (int i = 0; i <= health; i++) // Create a for loop to write the amount of hearts
                 {
-                    Console.Write("♥ ");
+                    Console.Write("♥ "); // Write a heart
                 }
             }
-            else
+            else // If the health is 0 or below
             {
-                Console.Write("X");
+                Console.Write("X"); // Write an X
             }
 
-            Console.WriteLine();
+            Console.WriteLine(); // Write a new line for some space
         }
 
         public void CurrentWord(string word, List<string> wordPrint, List<int> wordPos)
         {
-            string print = "";
-            for (int i = 0; i < word.Length; i++)
+            string print = ""; // Create a string to print the word
+            for (int i = 0; i < word.Length; i++) // Create a for loop based on the word length
             {
-                print += "_";
+                print += "_"; // Add a _ to the print 
             }
             Console.Write($"Current word: {print}"); // Write the word
 
-            if (wordPrint.Count > 0)
+            if (wordPrint.Count > 0) // Check if the wordprint list is not empty
             {
-                for (int i = 0; i < wordPrint.Count; i++)
+                for (int i = 0; i < wordPrint.Count; i++) // Create a for loop based on the amount of items in the list
                 {
                     Console.SetCursorPosition(wordPos[i] + 14, Console.CursorTop); // Set the cursor position to the index of the letter + 14
                     Console.Write($"{wordPrint[i]}"); // Write the letter(s)
@@ -134,9 +135,9 @@ namespace HangMan
 
         public void FullLayout(int health, string word, List<string> wordPrint, List<int> wordPos)
         {
-            Layout();
-            HealthColor(health);
-            CurrentWord(word, wordPrint, wordPos);
+            Layout(); // Call the layout method
+            HealthColor(health); // Call the healthcolor method
+            CurrentWord(word, wordPrint, wordPos); // Call the currentword method
         }
     }
 }

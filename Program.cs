@@ -8,7 +8,6 @@ class Program
     {
         do
         {
-
             OutputMethods op = new OutputMethods(); // Create a new instance of the HangMan class
             int length; // Create an int to hold the number of 
             int health = 10; // Create a int to hold the number of health/
@@ -28,44 +27,43 @@ class Program
             List<int> wordPos = new List<int>(); // Create an array to store the word
             List<string> wordPrint = new List<string>(); // Create an array to store the word
             // Console.WriteLine(word); // Debug
-            string wordPlaceHolder = word;
+            string wordPlaceHolder = word; // Create a string to store the word
 
 
             // Create a while loop to check if the user has any health left
-            while (health > 0)
+            while (health > 0) // Run loop while health is above 0
             {
-                op.FullLayout(health, word, wordPrint, wordPos);
-                string key = "";
+                op.FullLayout(health, word, wordPrint, wordPos); // Call the FullLayout method
+                string key = ""; // Placeholder for their key input
                 do
                 {
-                    Console.WriteLine(word);
+                    // Console.WriteLine(word); // Debug
                     Console.WriteLine("Type a letter to guess the word"); // Ask for their guess
                     key = op.GetLetter(); // Save their guess in a string
                     op.ClearCurrentConsoleLine(); // Clear the line
-                } while (!key.All(char.IsLetter));
+                } while (!key.All(char.IsLetter)); // If the user input is not a letter, ask again
 
-                if (!wordPlaceHolder.Contains(key))
+                if (!wordPlaceHolder.Contains(key)) // If the word does not contains the letter/key they pressed
                 {
-                    health--;
-                    Console.WriteLine($"Wrong! {key} is not in the word!");
+                    health--; // Remove 1 health
+                    Console.WriteLine($"Wrong! {key} is not in the word!"); // Tell the user they are wrong
                 }
 
-                while (wordPlaceHolder.Contains(key))
+                while (wordPlaceHolder.Contains(key)) // While the word contains the letter/key they pressed
                 {
-                    int ind = word.IndexOf(key);
-                    wordPrint.Add(key);
-                    wordPos.Add(ind);
-                    wordPlaceHolder = wordPlaceHolder.Replace(key, "_");
-                    Console.WriteLine($"Correct! {key} is in the word!");
+                    int ind = wordPlaceHolder.IndexOf(key); // Get the index of the letter
+                    wordPrint.Add(key); // Add the letter to the wordPrint array
+                    wordPos.Add(ind); // Add the index of the letter to the array
+                    wordPlaceHolder = wordPlaceHolder.Replace(key, "_"); // Replace the letter with an underscore
+                    Console.WriteLine($"Correct! {key} is in the word!"); // Tell the user they are correct
                 }
                 
-
 
                 if (health == 0) // If their health is 0 (aka, they lost, noobs lol)
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // Set the foreground color to red
-                    op.FullLayout(health, word, wordPrint, wordPos);
-                    
+                    op.FullLayout(health, word, wordPrint, wordPos); // Call the FullLayout method
+
                     Console.WriteLine("You ran out of health!"); // Tell the user they lost
                     Console.WriteLine($"The word was {word} and you guessed {wordPrint.Count} letters correctly"); // Tell the user the word and how many letters they guessed correctly
                     Console.ForegroundColor = ConsoleColor.White; // Set the foreground color to white (so default)
@@ -78,7 +76,7 @@ class Program
                     }
                 }
 
-                if (wordPrint.Count == word.Length)
+                if (wordPrint.Count == word.Length) // If the user guessed all the letters
                 {
                     op.FullLayout(health, word, wordPrint, wordPos);
                     Console.ForegroundColor = ConsoleColor.Green; // Set the foreground color to green
