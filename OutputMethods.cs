@@ -5,6 +5,7 @@ global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
 global using System.Diagnostics.Tracing;
+global using System.Runtime.InteropServices;
 
 namespace HangMan
 {
@@ -133,11 +134,27 @@ namespace HangMan
             Console.WriteLine(); // Add a little space
         }
 
-        public void FullLayout(int health, string word, List<string> wordPrint, List<int> wordPos)
+        public void FullLayout(int health, string word, List<string> wordPrint, List<string> GuessedKeys, List<int> wordPos) 
         {
             Layout(); // Call the layout method
             HealthColor(health); // Call the healthcolor method
             CurrentWord(word, wordPrint, wordPos); // Call the currentword method
+            KeyList(GuessedKeys); // Call the keylist method, i might set this one to [Optional]
+        }
+
+        public void KeyList(List<string> guessedWord)
+        {
+
+            Console.Write("Guessed keys: ");
+            if (guessedWord.Count > 0)
+            {
+                foreach (string item in guessedWord)
+                {
+                    Console.Write($"{item}");
+                }
+            }
+
+            Console.WriteLine();
         }
     }
 }
